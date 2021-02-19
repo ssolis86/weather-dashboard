@@ -11,49 +11,49 @@
     </head>
 
     <body>
-        <ul class="topnav">
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#news">Weather Dashboard</a></li>
-          </ul>
+      <nav class="navbar navbar-dark bg-dark">
+        <h2>Weather Dashboard</h2>
+      </nav>
           
-          <div class="container">
-              <div class="row">
-                  <div class="column">
+          
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                  <div id="submitForm">
+                    <textarea id="userInput" placeholder="City Name" class="float-left col-md-6"></textarea>
                       <div>
-                        <textarea class="float-left col-md-2"></textarea>
-                        <button>Search</button>
+                        <button id="searchButton" type="submit" class="btn btn-primary">Search</button>
                         <div class="card" style="width: 18rem;">
-                            <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Cras justo odio</li>
-                              <li class="list-group-item">Dapibus ac facilisis in</li>
-                              <li class="list-group-item">Vestibulum at eros</li>
-                            </ul>
-                          </div>
+                        <ul id="cityList" class="list-group list-group-flush">
+                          <li id="cityOne" class="list-group-item"></li>
+                          <li class="list-group-item"> </li>
+                          <li class="list-group-item"> </li>
+                          <li class="list-group-item"> </li>
+                          <li class="list-group-item"> </li>
+                          <li class="list-group-item"> </li>
+                        </ul>
                       </div>
+                    </div>
                   </div>
-              </div>
-          </div>
-          <div class="container col-md-6">
-              <div class="row">
-                  <div class="column">
-                    <div class="card">
-                        <div class="card-header">
-                          City
-                        </div>
-                        <div class="card-body">
-                          <!-- <blockquote class="blockquote mb-0"> -->
-                            <div id="temperature">Temperature: </div>
-                            <div id="Humidity"> Humidity: </div>
-                            <div id="windSpeed">Wind Speed: </div>
-                            <div id="uvIndex">UV Index: </div>
-                            
-                          <!-- </blockquote> -->
-                        </div>
-                      </div>
+                </div>
+                <div class="col-lg-8">
+                  <div class="card">
+                    <h2 id="cName" class="card-header">
+                      City:
+                    </h2>
+                    <div class="card-body">
+                      <!-- <blockquote class="blockquote mb-0"> -->
+                        <div id="temperature">Temperature: </div>
+                        <div id="Humidity"> Humidity: </div>
+                        <div id="windSpeed">Wind Speed: </div>
+                        <div id="uvIndex">UV Index: </div>
+                        
+                      <!-- </blockquote> -->
+                    </div>
                   </div>
-              </div>
-          </div>
-          
+                </div>
+            </div>
+        </div>
           <script src="assets/script.js"></script>
           <!-- <div style="padding:0 16px;">
             <h2>Atlana (8/15/2019)</h2>
