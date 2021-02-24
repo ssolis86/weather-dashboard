@@ -8,6 +8,11 @@ ul.topnav {
   overflow: hidden;
   background-color: #333;
 }
+.heading {
+  color: white;
+  text-align: center;  
+}
+
 
 ul.topnav li {float: center;}
 
