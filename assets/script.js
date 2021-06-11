@@ -32,16 +32,37 @@ var formSubmitHandler = function() {
       let uvIndex = data2.current.uvi;
       console.log("fTemp" + fTemp, "humidity" + humidity, "wind speed" + wSpeed, "UV index" + uvIndex );
       
-      document.getElementById('temperature').textContent = "Temperature: " + temperature;
+      document.getElementById('temperature').textContent = "Temperature: " + fTemp;
       document.getElementById('Humidity').textContent = "Humidity: " + humidity;
       document.getElementById('windSpeed').textContent = "Wind Speed: " + wSpeed;
       document.getElementById('uvIndex').textContent = "UV Index: " + uvIndex;
     })
-
-    
-    
   });
 
+}
+
+var fiveDay = function() { 
+  
+  fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=San Antonio&cnt=5&appid=2a0ccef3d39a4025d5525f79d575070e`, {
+
+    })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function (data2) {
+      console.log("fiveDay" , data2);
+      for (i=0; i < 5; i++) {
+        var currentTemp = data2.list[i].main.temp;
+        var faren = ((currentTemp-273.15) * (9/5)) + 32
+        let fTemp = faren.toFixed(2);
+        var humidity = data2.list[i].main.humidity;
+        var iconID = data2.list[i].weather[0].icon;
+        var icon = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
+        document.getElementById('temp' + i).textContent = "Temp: " + fTemp;
+        document.getElementById('humidity' + i).textContent = "Humidity: " + humidity;
+        document.getElementById('icon' + i).src = icon;
+      }
+    })
 }
     
 // I am presented with the 
@@ -70,6 +91,7 @@ var renderCitiesSearched = function() {
 }
 
   sButton.addEventListener("click", formSubmitHandler);
+  sButton.addEventListener("click", fiveDay);
 
   // Execute a function when the user releases a key on the keyboard
   usrInput.addEventListener("keyup", function(event) {
@@ -79,6 +101,7 @@ var renderCitiesSearched = function() {
       event.preventDefault();
     // Trigger the button element with a click
     formSubmitHandler();
+    fiveDay();
     
   }
 });
