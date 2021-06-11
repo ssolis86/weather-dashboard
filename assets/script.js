@@ -12,7 +12,7 @@ if (localCities !== null) {
 console.log("localCities" ,localCities);
   function formSubmitHandler(city, addCitytoArray) {
 
-  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2a0ccef3d39a4025d5525f79d575070e`, {
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2a0ccef3d39a4025d5525f79d575070e`, {
     cache: 'reload',
     
 })
