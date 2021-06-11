@@ -23,19 +23,22 @@ var formSubmitHandler = function() {
       return response.json();
     })
     .then(function (data2) {
-      console.log('current_weather', data.main.temp);
+      console.log(data);
       var wSpeed = data.wind.speed;
       var humidity = data.main.humidity;
       var temperature = data.main.temp;
       var faren = ((temperature-273.15) * (9/5)) + 32
       let fTemp = faren.toFixed(2);
       let uvIndex = data2.current.uvi;
-      console.log("fTemp" + fTemp, "humidity" + humidity, "wind speed" + wSpeed, "UV index" + uvIndex );
+      var iconID = data.weather[0].icon;
+      var icon = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
       
       document.getElementById('temperature').textContent = "Temperature: " + fTemp;
       document.getElementById('Humidity').textContent = "Humidity: " + humidity;
       document.getElementById('windSpeed').textContent = "Wind Speed: " + wSpeed;
       document.getElementById('uvIndex').textContent = "UV Index: " + uvIndex;
+      document.getElementById('todayIcon').src = icon;
+
     })
   });
 
