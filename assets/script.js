@@ -10,8 +10,7 @@ if (localCities !== null) {
 }
 
 console.log("localCities" ,localCities);
-  function formSubmitHandler(city) {
-  console.log(city);
+  function formSubmitHandler(city, addCitytoArray) {
 
   fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2a0ccef3d39a4025d5525f79d575070e`, {
     cache: 'reload',
@@ -30,7 +29,6 @@ console.log("localCities" ,localCities);
       return response.json();
     })
     .then(function (data2) {
-      console.log(data);
       var wSpeed = data.wind.speed;
       var humidity = data.main.humidity;
       var temperature = data.main.temp;
@@ -40,12 +38,14 @@ console.log("localCities" ,localCities);
       var iconID = data.weather[0].icon;
       var icon = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
       
-      
-      rSearch.unshift(city);
+      if (addCitytoArray) {
+        rSearch.unshift(city);
       if (rSearch.length > 10) {
         rSearch.pop();
       }
       window.localStorage.setItem('localCities', JSON.stringify(rSearch));
+      }
+      
       for (i=0; i<rSearch.length; i++) {
         document.getElementById('cityList' + i).textContent = rSearch[i];
       }
@@ -87,20 +87,10 @@ var fiveDay = function(city) {
     })
 }
 
-// var recentSearches = function(city) {
-  
-//   for (i=0; i<10; i++) {
-    
-//     // document.appendChild('cityList' + i).textContent = recentSearch;
-//     document.getElementById('cityList' + i).textContent = "City: " + city;
-//   }
-// }
-
-
   var onButtonClick = function(event) {
     
     console.log(document.getElementById('userInput').value);
-    formSubmitHandler(document.getElementById('userInput').value);
+    formSubmitHandler(document.getElementById('userInput').value, true);
     fiveDay(document.getElementById('userInput').value);
     // recentSearches(document.getElementById('recentSearch').value);
     
@@ -136,6 +126,14 @@ onPageLoad = function() {
     document.getElementById('cityList' + i).textContent = rSearch[i];
   }
 
+  if (rSearch.length > 0) {
+    formSubmitHandler(rSearch[0], false);
+    fiveDay(rSearch[0]);
+  }
+  else {
+    alert('Please make a search');
+  }
+  
 }
 
 onPageLoad();
