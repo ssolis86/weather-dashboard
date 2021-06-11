@@ -26,13 +26,16 @@ var formSubmitHandler = function() {
       console.log('current_weather', data.main.temp);
       var wSpeed = data.wind.speed;
       var humidity = data.main.humidity;
-      var tempurature = data.main.temp;
-      var faren = ((tempurature-273.15) * (9/5)) + 32
+      var temperature = data.main.temp;
+      var faren = ((temperature-273.15) * (9/5)) + 32
       let fTemp = faren.toFixed(2);
       let uvIndex = data2.current.uvi;
       console.log("fTemp" + fTemp, "humidity" + humidity, "wind speed" + wSpeed, "UV index" + uvIndex );
       
-      
+      document.getElementById('temperature').textContent = "Temperature: " + temperature;
+      document.getElementById('Humidity').textContent = "Humidity: " + humidity;
+      document.getElementById('windSpeed').textContent = "Wind Speed: " + wSpeed;
+      document.getElementById('uvIndex').textContent = "UV Index: " + uvIndex;
     })
 
     
