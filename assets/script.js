@@ -136,4 +136,17 @@ onPageLoad = function() {
   
 }
 
+function doStuff() {
+  let storage = getLocalstorage(localCities);
+  document.querySelector("cityList1").textContent = `got ${storage} from local storage`;
+}
+let clickableSearch = document.getElementById('cityList1').textContent;
+// let clickableSearch = document.querySelector("cityList1").textContent;
+console.log('clickableSearch',clickableSearch);
+if (clickableSearch !== '') {
+  document.getElementById('cityList1').onclick = function () {
+    formSubmitHandler(clickableSearch, false);
+  }
+}
+
 onPageLoad();
