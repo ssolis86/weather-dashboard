@@ -11,8 +11,7 @@
  *  [Contributors](#contributors)
 
  *  [Deployed_Link](#Deployed_Link)
-    
- *  [Contact](#Contact)
+
     
 
 
@@ -36,11 +35,3 @@ Stephen Solis
 ## Deployed_Link
 
 https://ssolis86.github.io/weather-dashboard/
-
-## Contact
-
-### GitHub Username
-https://github.com/ssolis86
-    
-### Email Address
-ssolis8619@gmail.com
