@@ -4,9 +4,10 @@ var listOfCities = document.querySelector('#cityList');
 var usrInput = document.querySelector('#userInput');
 var recentSearches = [];
 
-var formSubmitHandler = function() {
+  function formSubmitHandler(city) {
+  console.log(city);
 
-  fetch("http://api.openweathermap.org/data/2.5/weather?q=San Antonio,us&APPID=2a0ccef3d39a4025d5525f79d575070e", {
+  fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=2a0ccef3d39a4025d5525f79d575070e`, {
     cache: 'reload',
     
 })
@@ -38,15 +39,16 @@ var formSubmitHandler = function() {
       document.getElementById('windSpeed').textContent = "Wind Speed: " + wSpeed;
       document.getElementById('uvIndex').textContent = "UV Index: " + uvIndex;
       document.getElementById('todayIcon').src = icon;
+      document.getElementById('cName').textContent = "City: " + city;
 
     })
   });
 
 }
 
-var fiveDay = function() { 
+var fiveDay = function(city) { 
   
-  fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=San Antonio&cnt=5&appid=2a0ccef3d39a4025d5525f79d575070e`, {
+  fetch(`https://api.openweathermap.org/data/2.5/forecast/?q=${city}&cnt=5&appid=2a0ccef3d39a4025d5525f79d575070e`, {
 
     })
     .then(function(response) {
@@ -67,47 +69,25 @@ var fiveDay = function() {
       }
     })
 }
-    
-// I am presented with the 
-// city name, 
-// the date, 
-// an icon representation of 
-// weather conditions, 
-// the temperature, done
-// the humidity, done
-// the wind speed, 
-// and the UV index
 
-var renderCitiesSearched = function() {
-  listOfCities.innerHTML = "";
-
-  for (var i = 0; i < JSON.parse(localStorage.getItem("recentSearches")).length; i++) {
-    var cities = JSON.parse(localStorage.getItem("recentSearches"))[i];
-
-    var li = document.createElement('li');
-    li.textContent = cities;
-    li.setAttribute('data-index', i);
-    console.log(cities);
-    listOfCities.appendChild(li);
-  }
-
-}
-
-  sButton.addEventListener("click", formSubmitHandler);
-  sButton.addEventListener("click", fiveDay);
-
-  // Execute a function when the user releases a key on the keyboard
-  usrInput.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-    // Cancel the default action, if needed
-      event.preventDefault();
-    // Trigger the button element with a click
-    formSubmitHandler();
-    fiveDay();
+  var onButtonClick = function(event) {
+    console.log(document.getElementById('userInput').value);
+    formSubmitHandler(document.getElementById('userInput').value);
+    fiveDay(document.getElementById('userInput').value);
     
   }
-});
+      sButton.addEventListener("click", onButtonClick);
+      // Execute a function when the user releases a key on the keyboard
+      usrInput.addEventListener("keyup", function(event) {
+      // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+        // Cancel the default action, if needed
+          event.preventDefault();
+        // Trigger the button element with a click
+        onButtonClick();
+        
+      }
+    });
 
 onPageLoad = function() {
   var date = new Date();
