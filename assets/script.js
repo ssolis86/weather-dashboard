@@ -2,8 +2,14 @@
 var sButton = document.querySelector('#searchButton');
 var listOfCities = document.querySelector('#cityList');
 var usrInput = document.querySelector('#userInput');
-var rSearch = [];
 
+var localCities = window.localStorage.getItem('localCities');
+let rSearch = [];
+if (localCities !== null) {
+  rSearch = JSON.parse(window.localStorage.getItem('localCities'));
+}
+
+console.log("localCities" ,localCities);
   function formSubmitHandler(city) {
   console.log(city);
 
@@ -34,10 +40,12 @@ var rSearch = [];
       var iconID = data.weather[0].icon;
       var icon = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
       
+      
       rSearch.unshift(city);
       if (rSearch.length > 10) {
         rSearch.pop();
       }
+      window.localStorage.setItem('localCities', JSON.stringify(rSearch));
       for (i=0; i<rSearch.length; i++) {
         document.getElementById('cityList' + i).textContent = rSearch[i];
       }
@@ -124,6 +132,9 @@ onPageLoad = function() {
     console.log(formatDate);
   }
 
+  for (i=0; i<rSearch.length; i++) {
+    document.getElementById('cityList' + i).textContent = rSearch[i];
+  }
 
 }
 
