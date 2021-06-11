@@ -2,7 +2,7 @@
 var sButton = document.querySelector('#searchButton');
 var listOfCities = document.querySelector('#cityList');
 var usrInput = document.querySelector('#userInput');
-var recentSearches = [];
+var rSearch = [];
 
   function formSubmitHandler(city) {
   console.log(city);
@@ -34,12 +34,21 @@ var recentSearches = [];
       var iconID = data.weather[0].icon;
       var icon = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
       
+      rSearch.unshift(city);
+      if (rSearch.length > 10) {
+        rSearch.pop();
+      }
+      for (i=0; i<rSearch.length; i++) {
+        document.getElementById('cityList' + i).textContent = rSearch[i];
+      }
+      
       document.getElementById('temperature').textContent = "Temperature: " + fTemp;
       document.getElementById('Humidity').textContent = "Humidity: " + humidity;
       document.getElementById('windSpeed').textContent = "Wind Speed: " + wSpeed;
       document.getElementById('uvIndex').textContent = "UV Index: " + uvIndex;
       document.getElementById('todayIcon').src = icon;
       document.getElementById('cName').textContent = "City: " + city;
+      
 
     })
   });
@@ -70,10 +79,22 @@ var fiveDay = function(city) {
     })
 }
 
+// var recentSearches = function(city) {
+  
+//   for (i=0; i<10; i++) {
+    
+//     // document.appendChild('cityList' + i).textContent = recentSearch;
+//     document.getElementById('cityList' + i).textContent = "City: " + city;
+//   }
+// }
+
+
   var onButtonClick = function(event) {
+    
     console.log(document.getElementById('userInput').value);
     formSubmitHandler(document.getElementById('userInput').value);
     fiveDay(document.getElementById('userInput').value);
+    // recentSearches(document.getElementById('recentSearch').value);
     
   }
       sButton.addEventListener("click", onButtonClick);
