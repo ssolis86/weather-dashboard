@@ -83,3 +83,21 @@ var renderCitiesSearched = function() {
   }
 });
 
+onPageLoad = function() {
+  var date = new Date();
+  d = date.getDate(),
+  m = date.getMonth(),
+  y = date.getFullYear();
+  var tDate = m+'/'+d+'/'+y;
+  
+  for (i=1; i < 6; i++) {
+    var curDate = new Date(y, m, d+i)
+    var formatDate = curDate.getMonth() +'/'+curDate.getDate()+'/'+ curDate.getFullYear();
+    document.getElementById('date' + i).textContent = formatDate;
+    console.log(formatDate);
+  }
+
+
+}
+
+onPageLoad();
